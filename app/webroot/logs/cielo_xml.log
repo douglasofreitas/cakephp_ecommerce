@@ -1,0 +1,192 @@
+***********************************************
+2012-05-18 17:49:22:000000 (BRT)
+DO ARQUIVO: /loja_homesample/pedidos/index_admin
+OPERAÇÃO: algum texto
+ENVIO: teste
+
+***********************************************
+2012-05-20 20:44:54:000000 (BRT)
+DO ARQUIVO: /loja_homesample/pedidos/fazer_pagamento
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="24fa03e4245b68d9381f24f0529a1b7d" versao="VERSAO">
+   <dados-ec>
+      <numero>1006993069</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero></numero>
+      <valor>100</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-05-20T20:44:54</data-hora>
+      <descricao>Pedido na Home Sample</descricao>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>1</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://localhost/loja_homesample/pedidos/pedido_concluido</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar></capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-05-20 20:45:23:000000 (BRT)
+DO ARQUIVO: /loja_homesample/pedidos/fazer_pagamento
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="40f390f5283a1703ea203d9e530832da" versao="VERSAO">
+   <dados-ec>
+      <numero>1006993069</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>28</numero>
+      <valor>100</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-05-20T20:45:23</data-hora>
+      <descricao>Pedido na Home Sample</descricao>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>1</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://localhost/loja_homesample/pedidos/pedido_concluido</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar></capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-05-20 20:47:13:000000 (BRT)
+DO ARQUIVO: /loja_homesample/pedidos/fazer_pagamento
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="bab40c7dc89a48fba522f769f459f9d6" versao="1.1.0">
+   <dados-ec>
+      <numero>1006993069</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>28</numero>
+      <valor>100</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-05-20T20:47:13</data-hora>
+      <descricao>Pedido na Home Sample</descricao>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>1</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://localhost/loja_homesample/pedidos/pedido_concluido</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar></capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-05-20 20:48:12:000000 (BRT)
+DO ARQUIVO: /loja_homesample/pedidos/fazer_pagamento
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="345f0bf08576119667d8838d34e1dce2" versao="1.1.0">
+   <dados-ec>
+      <numero>1006993069</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>28</numero>
+      <valor>100</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-05-20T20:48:12</data-hora>
+      <descricao>Pedido na Home Sample</descricao>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>1</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://localhost/loja_homesample/pedidos/pedido_concluido</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar></capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-05-20 20:48:15:000000 (BRT)
+DO ARQUIVO: /loja_homesample/pedidos/fazer_pagamento
+OPERAÇÃO: Transacao
+RESPOSTA: 
+
+***********************************************
+2012-05-20 20:49:38:000000 (BRT)
+DO ARQUIVO: /loja_homesample/pedidos/fazer_pagamento
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="15d990e6ecb2591083d574ddf315040c" versao="1.1.0">
+   <dados-ec>
+      <numero>1006993069</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>28</numero>
+      <valor>100</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-05-20T20:49:38</data-hora>
+      <descricao>Pedido na Home Sample</descricao>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>1</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://localhost/loja_homesample/pedidos/pedido_concluido</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar></capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-05-20 20:49:38:000000 (BRT)
+DO ARQUIVO: /loja_homesample/pedidos/fazer_pagamento
+OPERAÇÃO: Transacao
+RESPOSTA: 
+
+***********************************************
+2012-05-20 21:18:33:000000 (BRT)
+DO ARQUIVO: /lojateste/pedidos/fazer_pagamento
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="6ef186683cb567119d8f9ff7b3e2bd34" versao="1.1.0">
+   <dados-ec>
+      <numero>1006993069</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>1</numero>
+      <valor>100</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-05-20T21:18:33</data-hora>
+      <descricao>Pedido na Home Sample</descricao>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>1</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://localhost/loja_homesample/pedidos/pedido_concluido</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar></capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-05-20 21:18:33:000000 (BRT)
+DO ARQUIVO: /lojateste/pedidos/fazer_pagamento
+OPERAÇÃO: Transacao
+RESPOSTA: 
+

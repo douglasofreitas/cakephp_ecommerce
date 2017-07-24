@@ -1,0 +1,88 @@
+<label class="formulario">Nome</label>
+<?php echo $user['User']['name']; ?>
+<br/>
+<label class="formulario">E-mail</label>
+<?php echo $user['User']['username']; ?>
+<br/>
+<label class="formulario">CPF</label>
+<?php echo $user['User']['cpf']; ?>
+<br/>
+<label class="formulario">Telefone</label>
+<?php echo $user['User']['telefone']; ?>
+<br/>
+<label class="formulario">Endereço</label>
+<?php echo $user['User']['endereco'].' '.$user['User']['numero']; ?>
+<br/>
+<label class="formulario">Bairro</label>
+<?php echo $user['User']['bairro']; ?>
+<br/>
+<label class="formulario">CEP</label>
+<?php echo $user['User']['cep']; ?>
+<br/>
+<label class="formulario">Cidade</label>
+<?php  
+if(!empty($user['User']['cidade_id']))
+	echo $user['Cidade']['nome'].' - '.$estado['Estado']['nome'];
+else
+	echo 'Não definido'; 
+?>
+<br>
+<label class="formulario">Data de cadastro</label>
+<?php echo date('d/m/Y H:m:s', strtotime($user['User']['created'])); ?>
+<br/>
+<label class="formulario">Data da ultima modificação</label>
+<?php echo date('d/m/Y H:m:s', strtotime($user['User']['modified'])); ?>
+<br/>
+
+<br/>
+<label class="formulario">Pedidos</label>
+<?php if(count($pedidos) == 0): ?>
+	Não há pedidos
+<?php else: ?>
+	<table class="listagem" width="auto">
+		<tr class="listagem_header">
+				<td style="width:auto; text-align:center;" >Código</td>
+				<td style="width:150px; text-align:center;" >Número de produtos</td>
+				<td style="width:150px; text-align:center;" >Status do pedido</td>
+				<td style="width:150px; text-align:center;" >Data de criação</td>
+				<td style="width:60px; text-align:center;"  class="actions"><?php __('Ações');?></td>
+		</tr>
+		<?php
+		$i = 0;
+		foreach ($pedidos as $pedido):
+			$class = null;
+			if ($i++ % 2 == 0) {
+				$class = ' class="linha_impar"';
+			}else{
+				$class = ' class="linha_par"';
+			}
+		?>
+		<tr<?php echo $class;?>>
+			<td style="text-align:center">
+				<?php 
+				echo $this->Html->link(
+						$pedido['Pedido']['id'],
+						'/pedidos/view/'.$pedido['Pedido']['id']);  
+				?>
+				&nbsp;
+			</td>
+			<td style="text-align:center">
+				<?php echo count($pedido['Itempedido']); ?>
+				&nbsp;
+			</td>
+			<td style="text-align:center">
+				<?php echo $pedido['Statuspedido']['nome']; ?>
+				&nbsp;
+			</td>
+			<td style="text-align:center">
+				<?php echo date('d/m/Y H:m:s', strtotime($pedido['Pedido']['created'])); ?>
+				&nbsp;
+			</td>
+			<td style="text-align:center" class="actions">
+				
+				<?php echo $this->Html->image('icon/find.png', array('alt' => 'Visualizar pedido', 'url' => '/pedidos/view/'.$pedido['Pedido']['id'], 'class' => 'tipHoverRight', 'title' => 'Visualizar detalhes'));?>
+			</td>
+		</tr>
+		<?php endforeach; ?>
+	</table>
+<?php endif; ?>

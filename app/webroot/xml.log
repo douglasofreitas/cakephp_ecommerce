@@ -1,0 +1,86 @@
+***********************************************
+2011-09-01 08:13:57:000000 (BRT)
+DO ARQUIVO: /lojavirtual/pedidos/pagamento
+OPERAÇÃO: Requisicao Tid
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-tid id="0ae3b77f4ffb147a2382a889170d22cc" versao ="VERSAO">
+   <dados-ec>
+      <numero></numero>
+      <chave></chave>
+   </dados-ec>
+   <forma-pagamento>
+      <bandeira></bandeira>
+      <produto></produto>
+      <parcelas></parcelas>
+   </forma-pagamento>
+</requisicao-tid>
+
+***********************************************
+2011-09-01 10:43:20:000000 (BRT)
+DO ARQUIVO: /lojavirtual/pedidos/pagamento
+OPERAÇÃO: Requisicao Tid
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-tid id="01d8d3c64e60040135d3b773b5ef634f" versao ="VERSAO">
+   <dados-ec>
+      <numero></numero>
+      <chave></chave>
+   </dados-ec>
+   <forma-pagamento>
+      <bandeira></bandeira>
+      <produto></produto>
+      <parcelas></parcelas>
+   </forma-pagamento>
+</requisicao-tid>
+
+***********************************************
+2011-09-01 10:43:23:000000 (BRT)
+DO ARQUIVO: /lojavirtual/pedidos/pagamento
+OPERAÇÃO: Requisicao Tid
+RESPOSTA: 
+
+***********************************************
+2011-09-01 10:52:16:000000 (BRT)
+DO ARQUIVO: /lojavirtual/pedidos/pagamento
+OPERAÇÃO: Requisicao Tid
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-tid id="d5c8014f5c483802b8e2d854b7964a2e" versao ="1.1.0">
+   <dados-ec>
+      <numero></numero>
+      <chave></chave>
+   </dados-ec>
+   <forma-pagamento>
+      <bandeira></bandeira>
+      <produto></produto>
+      <parcelas></parcelas>
+   </forma-pagamento>
+</requisicao-tid>
+
+***********************************************
+2011-09-01 10:52:16:000000 (BRT)
+DO ARQUIVO: /lojavirtual/pedidos/pagamento
+OPERAÇÃO: Requisicao Tid
+RESPOSTA: 
+
+***********************************************
+2011-09-01 10:55:24:000000 (BRT)
+DO ARQUIVO: /lojavirtual/pedidos/pagamento
+OPERAÇÃO: Requisicao Tid
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-tid id="06e6dd96eecfb337d27a38286f759074" versao ="1.1.0">
+   <dados-ec>
+      <numero></numero>
+      <chave></chave>
+   </dados-ec>
+   <forma-pagamento>
+      <bandeira></bandeira>
+      <produto></produto>
+      <parcelas></parcelas>
+   </forma-pagamento>
+</requisicao-tid>
+
+***********************************************
+2011-09-01 10:55:24:000000 (BRT)
+DO ARQUIVO: /lojavirtual/pedidos/pagamento
+OPERAÇÃO: Requisicao Tid
+RESPOSTA: 
+

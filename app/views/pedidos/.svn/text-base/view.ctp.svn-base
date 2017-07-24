@@ -1,0 +1,88 @@
+Código do pedido: <?php echo $pedido['Pedido']['id'] ?> <br>
+<br>
+<table>
+	<tr>
+		<td>Status do pedido:</td>
+		<td><strong><?php echo $pedido['Statuspedido']['nome'] ?></strong></td>
+	</tr>
+	<tr>
+		<td>Status do pagamento:</td>
+		<td style="width: 220px">
+                    <strong> 
+                    <?php echo $fatura['Statusfatura']['nome_cliente'] ?>
+                    </strong>
+                    <?php
+                    if($fatura['Statusfatura']['id'] == 7 & $pedido['Statuspedido']['id'] == 1){
+                        //Mostrar botão para fazer pagamento
+                        echo $this->Form->create('Pedido', array('url' => array('controller' => 'pedidos', 'action' =>'fazer_pagamento_antigo/'.$pedido['Pedido']['id']), 'style' => 'float:right'));
+                        echo '<input style="" type="submit" class="btn" value="Fazer pagamento">';
+                    }
+                    ?>
+		</td>
+	</tr>
+</table>
+<br>
+Data do pedido: <?php echo date('d/m/Y H:m:s', strtotime($pedido['Pedido']['created'])); ?><br>
+<br>
+<table class="listagem" >
+	<tr class="listagem_header">
+		<td style="min-width: 100px">Produto</td>
+                <td align="center">Quantidade</td>
+		<td align="center">Valor</td>
+	</tr>
+
+	<?php
+	$valor_total = $pedido['Pedido']['frete'];
+	$i = 0;
+	foreach($itenspedido as $item){
+		
+		$class = null;
+		if ($i++ % 2 == 0) {
+			$class = ' class="linha_impar"';
+		}else{
+			$class = ' class="linha_par"';
+		}
+		
+		if(!empty($item['Itempedido']['modelo']))
+			$modelo = ' ('.$item['Itempedido']['modelo'].')';
+		else 
+			$modelo = '';
+		
+		echo '<tr '.$class.' ><td>';
+		echo $this->Html->link(
+			$item['Produto']['nome'].' '.$modelo,
+			'/produtos/view/'.$item['Produto']['id'],
+                        array('target' => '_blank'));  
+		echo '</td><td align="center">';
+                echo $item['Itempedido']['quantidade'];
+                echo '</td><td>R$ ';
+		echo number_format($item['Itempedido']['valor_total'], 2, ',', '.');
+		echo '</td></tr>';
+		
+		$valor_total += $item['Itempedido']['valor_total']; 
+	}
+	?>
+</table>
+<table class="listagem" >
+	<tr >
+		<td style="width: auto;min-width: 100px">
+                    Frete 
+                    <?php
+                    if(!empty($pedido['Pedido']['tipo_correio']))
+                        echo ' ('.$tipo_correio.')';
+                    ?>
+                </td>
+		<td width="auto">R$ <?php echo number_format($pedido['Pedido']['frete'],2, ',', '.'); ?></td>
+	</tr>
+	<tr >
+		<td>Valor Total</td>
+		<td><strong>R$ <?php echo number_format($valor_total,2, ',', '.') ?></strong></td>
+	</tr>
+</table>
+
+<br/><br/>
+Endereço de entrega:<br/><br/>
+<strong>Destinatário:</strong> <?php echo $pedido['Pedido']['nome']; ?><br>
+<strong>Endereço:</strong> <?php echo $pedido['Pedido']['endereco']; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Número:</strong> <?php echo $pedido['Pedido']['numero']; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Complemento:</strong> <?php echo $pedido['Pedido']['complemento']; ?> <br>
+<strong>CEP:</strong> <?php echo $pedido['Pedido']['cep']; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Bairro:</strong> <?php echo $pedido['Pedido']['bairro']; ?> <br>
+<strong>Cidade:</strong> <?php echo $pedido['Cidade']['nome'].' - '.$estado['Estado']['nome']; ?> <br>

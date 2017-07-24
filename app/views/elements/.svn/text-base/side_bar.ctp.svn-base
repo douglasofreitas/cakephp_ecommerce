@@ -1,0 +1,206 @@
+<?php 
+    //para usar nos formulários de busca
+    if($name_side_bar == 'fotogalerias')
+        $model_busca = 'Fotogaleria';
+    else
+        $model_busca = 'Produto';
+    
+    
+    if($login_group == 'Administrador'): ?>
+	<?php if($nameSession == 'manage'): ?>
+		<div id="Menu_Lateral">
+			<?php if($controller_name == 'fotogalerias'): ?>
+				<h2><?php echo $html->link('Galeria', '/fotogalerias/index'); ?></h2> 
+				<ul class="admin">
+					<li><?php echo $html->link('Cadastrar Foto', '/fotogalerias/add'); ?></li>
+					<li><?php echo $html->link('Listar', '/fotogalerias/index'); ?></li>
+					<li><?php echo $html->link('Buscar', '/fotogalerias/filtro_form'); ?></li>
+				</ul>
+				<br><br>
+				<?php 
+				//listar as categorias e subcategorias de cada parte
+				if(true)
+                                    foreach ($side_bar as $categoria){
+                                            //exibe nome da categoria
+                                            echo '<h2>'.$html->link($categoria['Categoria']['nome'], '/fotogalerias/filtro_categoria/'.$categoria['Categoria']['id']).'</h2>';
+
+                                            if(count($categoria['Subcategoria']) > 0){
+                                                    echo '<ul class="admin">';
+                                                    foreach ($categoria['Subcategoria'] as $sub){
+                                                            echo '<li>'.$html->link($sub['nome'], '/fotogalerias/filtro_subcategoria/'.$sub['id']).'</li>';
+                                                    }
+                                                    echo '</ul>';
+                                            }
+                                    }
+				
+				?>	
+			<?php elseif ($controller_name == 'produtos'): ?>
+				<h2><?php echo $html->link('Produtos', '/produtos'); ?></h2> 
+				<ul class="admin">
+					<li><?php echo $html->link('Cadastrar Produto', '/produtos/add'); ?></li>
+					<li><?php echo $html->link('Listar', '/produtos'); ?></li>
+					<li><?php echo $html->link('Buscar', '/produtos/filtro_form'); ?></li>
+				</ul>
+                                <br/><br/>
+                                <?php 
+				//listar as categorias e subcategorias de cada parte
+				if(true)
+                                    foreach ($side_bar as $categoria){
+                                            //exibe nome da categoria
+                                            echo '<h2>'.$html->link($categoria['Categoria']['nome'], '/produtos/filtro_categoria/'.$categoria['Categoria']['id']).'</h2>';
+
+                                            if(count($categoria['Subcategoria']) > 0){
+                                                    echo '<ul class="admin">';
+                                                    foreach ($categoria['Subcategoria'] as $sub){
+                                                            echo '<li>'.$html->link($sub['nome'], '/produtos/filtro_subcategoria/'.$sub['id']).'</li>';
+                                                    }
+                                                    echo '</ul>';
+                                            }
+                                    }
+				
+				?>
+                                
+			<?php else: ?>
+				<h2><?php echo $html->link('Dados pessoais', '/users/view_data'); ?></h2>
+				<br>
+                                
+                                <h2><?php echo $html->link('Pedidos', '/pedidos'); ?></h2> 
+				<ul class="admin">
+					<li><?php echo $html->link('Listar', '/pedidos'); ?></li>
+				</ul>
+                                
+                                <br/>
+				<h2><?php echo $html->link('Usuários', '/users'); ?></h2> 
+				<ul class="admin">
+					<li><?php echo $html->link('Cadastrar', '/users/add'); ?></li>
+					<li><?php echo $html->link('Buscar', '#', array('class' => 'tipHoverBottom', 'title' => 'Em desenvolvimento')); ?></li>
+				</ul>
+				
+                                <br>
+				<h2><?php echo $html->link('Categorias', '/categorias'); ?></h2> 
+				<ul class="admin">
+					<li><?php echo $html->link('Cadastrar', '/categorias/add'); ?></li>
+					<li><?php echo $html->link('Listar', '/categorias'); ?></li>
+				</ul>
+				<br>
+				<h2><?php echo $html->link('Eventos', '/eventos'); ?></h2> 
+				<ul class="admin">
+					<li><?php echo $html->link('Cadastrar', '/eventos/add'); ?></li>
+					<li><?php echo $html->link('Listar', '/eventos'); ?></li>
+				</ul>
+			<?php endif; ?>
+		</div>
+	<?php elseif ($nameSession == 'manage_store'): ?>
+                <div id="Menu_Lateral">
+			<h2><?php echo $html->link('Dados da loja', '/lojas/dados_gerais'); ?></h2>
+			<h2><?php echo $html->link('E-mails', '/emaillojas'); ?></h2>
+		</div>
+        <?php elseif ($nameSession == 'usuario'): ?>
+		<div id="Menu_Lateral">
+			<h2><?php echo $html->link('Dados pessoais', '/users/view_data'); ?></h2>
+			<h2><?php echo $html->link('Pedidos', '/pedidos'); ?></h2>
+		</div>
+	<?php else: ?>
+		<div id="Menu_Lateral">
+			<h2><?php echo $html->link('Dados pessoais', '/users/view_data'); ?></h2>
+			<h2><?php echo $html->link('Galeria de Fotos', '/fotogalerias'); ?></h2>
+			<h2><?php echo $html->link('Produtos', '/produtos'); ?></h2>
+		</div>
+	
+	<?php endif; ?>
+<?php elseif ($login_group == 'Cliente'): ?>
+	<?php if($controller_name == 'home' | $controller_name == 'pedidos'): ?>
+		<div id="Menu_Lateral">
+			<h2><?php echo $html->link('Dados pessoais', '/users/view_data'); ?></h2>
+			<h2><?php echo $html->link('Pedidos', '/pedidos'); ?></h2>
+		</div>
+	<?php else: ?>
+	
+		<div id="Menu_Lateral" >
+			<?php
+			foreach ($side_bar as $categoria){
+				//exibe nome da categoria
+				echo '<h2>'.$html->link($categoria['Categoria']['nome'], '/'.$name_side_bar.'/filtro_categoria/'.$categoria['Categoria']['id']).'</h2>';
+				
+				if(count($categoria['Subcategoria']) > 0){
+					echo '<ul class="admin">';
+					foreach ($categoria['Subcategoria'] as $sub){
+						echo '<li>'.$html->link($sub['nome'], '/'.$name_side_bar.'/filtro_subcategoria/'.$sub['id']).'</li>';
+					}
+					echo '</ul>';
+				}
+			}
+			?>	
+                    
+                        <?php if($controller_name == 'fotogalerias'): ?>
+                            <br/><br/>
+                            <?php echo '<h2>'.$html->link('Buscar Foto', '/'.$name_side_bar.'/filtro_form').'</h2>'; ?>
+
+                        <?php else: ?>
+                            <br/><br/>
+                            <?php echo '<h2>'.$html->link('Buscar Produto', '/'.$name_side_bar.'/filtro_form').'</h2>'; ?>
+
+                        <?php endif; ?>
+                    
+                        <?php
+                        //formulário para busca rápida
+                        echo $this->Form->create($model_busca, array('enctype' => 'multipart/form-data', 'url' => array('controller' => $name_side_bar, 'action' =>'filtro_form')));
+                        ?>
+                        <ul class="admin">
+                            <li><?php echo $this->Form->input('busca', array('style' => 'width:92%', 'label' => false)); ?></li>
+                            <li><?php echo '<input style="" type="submit" class="btn" value="Buscar">'; ?>&nbsp;</li>
+                        </ul>
+                        <?php echo '</form>'; ?>
+		</div>
+	<?php endif; ?>
+<?php else: ?>
+
+		<div id="Menu_Lateral" >
+			<?php 
+			
+			foreach ($side_bar as $categoria){
+				//exibe nome da categoria
+				echo '<h2>'.$html->link($categoria['Categoria']['nome'], '/'.$name_side_bar.'/filtro_categoria/'.$categoria['Categoria']['id']).'</h2>';
+				
+				if(count($categoria['Subcategoria']) > 0){
+					echo '<ul class="admin">';
+					foreach ($categoria['Subcategoria'] as $sub){
+						echo '<li>'.$html->link($sub['nome'], '/'.$name_side_bar.'/filtro_subcategoria/'.$sub['id']).'</li>';
+					}
+					echo '</ul>';
+				}
+			}
+			
+			?>	
+                    
+                    
+                        <?php if($controller_name == 'fotogalerias'): ?>
+                            <br/><br/>
+                            <?php echo '<h2>'.$html->link('Buscar Foto', '/'.$name_side_bar.'/filtro_form').'</h2>'; ?>
+
+                        <?php else: ?>
+                            <br/><br/>
+                            <?php echo '<h2>'.$html->link('Buscar Produto', '/'.$name_side_bar.'/filtro_form').'</h2>'; ?>
+
+                        <?php endif; ?>
+                    
+                        <?php
+                        //formulário para busca rápida
+                        echo $this->Form->create($model_busca, array('enctype' => 'multipart/form-data', 'url' => array('controller' => $name_side_bar, 'action' =>'filtro_form')));
+                        ?>
+                        <ul class="admin">
+                            <li><?php echo $this->Form->input('busca', array('style' => 'width:92%', 'label' => false)); ?></li>
+                            <li><?php echo '<input style="" type="submit" class="btn" value="Buscar">'; ?>&nbsp;</li>
+                        </ul>
+                        <?php echo '</form>'; ?>
+                        
+		</div>
+		
+
+		
+<?php endif; ?>
+
+<?php 
+//echo '<br>$nameSession: '.$nameSession ;
+//echo '<br>$controller_name: '.$controller_name ;
+?>

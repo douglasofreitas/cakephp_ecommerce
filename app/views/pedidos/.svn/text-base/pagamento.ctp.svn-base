@@ -1,0 +1,99 @@
+
+<table>
+	<tr>
+            <td valign="top" width="350px" style="padding-right: 15px;">
+			Código do pedido: <?php echo $pedido['Pedido']['id'] ?> <br>
+			<br>
+			<table class="listagem" >
+				<tr class="listagem_header">
+					<td style="min-width: 100px">Produto</td>
+					<td align="center">Quant.</td>
+                                        <td align="center">Valor</td>
+				</tr>
+			
+				<?php
+                                
+                                //echo '<pre>';
+                                //print_r($pedido);
+                                //echo '</pre>';
+                                
+				$valor_total = $pedido['Pedido']['frete'];
+				$i = 0;
+				foreach($pedido['item'] as $item){
+					
+                                    $class = null;
+                                    if ($i++ % 2 == 0) {
+                                            $class = ' class="linha_impar"';
+                                    }else{
+                                            $class = ' class="linha_par"';
+                                    }
+
+                                    echo '<tr '.$class.' ><td>';
+                                    echo $item['Produto']['nome'];
+                                    if(!empty($item['Itempedido']['modelo']))
+                                        echo ' ('.$item['Itempedido']['modelo'].')';
+                                    echo '</td><td>';
+                                    echo $item['Itempedido']['quantidade'];
+                                    echo '</td><td>R$ ';
+                                    echo $item['Itempedido']['valor_total_form'];
+                                    echo '</td></tr>';
+                                    $valor_total += $item['Itempedido']['valor_total']; 
+				}
+				?>
+			</table>
+			<br>
+			<table class="listagem" >
+				<tr >
+					<td width="100px">Frete</td>
+					<td>R$ <?php echo $pedido['Pedido']['frete_form'] ?></td>
+				</tr>
+				<tr >
+					<td>Valor Total</td>
+					<td><strong>R$ <?php echo number_format($valor_total,2, ',', '.') ?></strong></td>
+				</tr>
+			</table>
+                        <br/><br/>
+                        <?php 
+                        echo $this->Form->create('Pedido', array('url' => array('controller' => 'pedidos', 'action' =>'obter_endereco'), 'class' => 'formulario'));
+                        echo '<input type="submit" value="Voltar" class="submit"></form>';	
+                        ?>
+		</td>
+		<td valign="top">
+			
+			<?php
+			//PAGSEGURO
+                        echo 'Clique no botão abaixo para realizar o pagamento e concluir o pedido<br><br>';
+                        echo $this->Form->create('PagSeguro', array('url' => array('controller' => 'pedidos', 'action' =>'fazer_pagamento'), 'class' => 'formulario'));
+                        echo '<input type="submit" value="Fazer Pagamento" class="submit"></form>';
+                        
+                        //CIELO
+                        if(false){
+                        
+                            echo 'Preencha o formulário abaixo para realizar o pagamento<br><br>';
+                            echo $this->Form->create('Cielo', array('url' => array('controller' => 'pedidos', 'action' =>'fazer_pagamento'), 'class' => 'formulario'));
+                            echo '<strong>Forma de pagamento</strong>';
+                            echo '<br><br>';
+                            echo $this->Form->select('codigoBandeira', $select_bandeiras, null,  array('empty' => false));
+                            echo '<br><br>';
+                            foreach($select_formaspagamento as $id_forma => $nome_forma){
+                                    echo '<input type="radio" checked="checked" name="data[Cielo][formaPagamento]" value="'.$id_forma.'" />';
+                                    echo $nome_forma.'<br>';
+                            }
+                            echo '<br><br>';
+                            echo '<input type="submit" value="Finalizar Pagamento" class="submit"></form>';
+                        }
+			?>
+                    
+                    
+                        <br/><br/><br/><br/>
+                        <strong>Endereço de entrega:</strong><br/><br/>
+                        <strong>Destinatário:</strong> <?php echo $pedido['Pedido']['nome']; ?><br/><br/>
+                        <strong>Endereço:</strong> <?php echo $pedido['Pedido']['endereco']; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Número:</strong> <?php echo $pedido['Pedido']['numero']; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Complemento:</strong> <?php echo $pedido['Pedido']['complemento']; ?> <br/><br/>
+                        <strong>CEP:</strong> <?php echo $pedido['Pedido']['cep']; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Bairro:</strong> <?php echo $pedido['Pedido']['bairro']; ?> <br/><br/>
+                        <strong>Cidade:</strong> <?php echo $cidade_form; ?> <br>
+
+                    
+		</td>
+	</tr>
+</table>
+

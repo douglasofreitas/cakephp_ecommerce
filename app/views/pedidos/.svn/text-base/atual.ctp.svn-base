@@ -1,0 +1,213 @@
+Número de itens: 
+<?php
+if(empty($pedido['item']))
+	echo '0';
+else 
+	echo count($pedido['item']); 
+?><br />
+<br>
+
+<script type="text/javascript">
+
+	$(function() {
+		<?php foreach ($pedido['item'] as $item): ?>
+				
+			$('#LinkAlteraQuantidade<?php echo $item['Produto']['id'] ?>').click (function() {
+				$('#AlteraQuantidade<?php echo $item['Produto']['id'] ?>').submit();
+			});
+		
+		<?php endforeach; ?>
+	});
+
+</script>
+
+<table class="listagem" width="100%">
+	<tr class="listagem_header">
+			<td style="width:auto; text-align:left;" >Produto</td>
+			<td style="width:120px; text-align:center;" >Quantidade</td>
+			<td style="width:180px; text-align:center;" >Entrega</td>
+			<td style="width:180px; text-align:center;" >Valor Unitário</td>
+			<td style="width:180px; text-align:center;" >Valor Total</td>
+	</tr>
+	<?php
+	
+	if(empty($pedido['item']))
+		echo '<tr><td colspan="5" style="text-align: center;padding-top: 15px;">Não há itens na cesta</td></tr>';
+	else
+	if(count($pedido['item']) > 0){
+	
+		$i = 0;
+		$subtotal = 0.0;
+		foreach ($pedido['item'] as $item){
+			$class = null;
+			
+			$subtotal += $item['Itempedido']['valor_total'];
+			
+			if ($i++ % 2 == 0) {
+				$class = ' class="linha_impar"';
+			}else{
+				$class = ' class="linha_par"';
+			}
+			?>
+			<tr <?php echo $class;?>>
+				<td style="text-align:center">
+					
+					<table width="100%">
+						<tr>
+							<td>
+								<span style="float:left">
+									<?php echo $this->Html->image('/fotos/'.$item['Produto']['img_mini'], array("alt" => "[Imagem]".$item['Produto']['nome'], 'style' => 'max-width:100px')) ?>
+								</span>
+							</td>
+							<td align="center" valign="center" width="auto" >
+								<?php 
+								$modelo = '';
+								if(!empty($item['Itempedido']['modelo']))
+                                                                    $modelo = ' ( '.$item['Itempedido']['modelo'].' )';
+								echo $this->Html->link(
+                                                                    $item['Produto']['nome'].$modelo,
+                                                                    '/produtos/view/'.$item['Produto']['id']);  
+								?>
+								&nbsp;
+							</td>
+						</tr>
+					</table>
+					
+				</td>
+				<td style="text-align:center">
+					<?php
+					//criar formulário para mudança de quantidade do produto
+					echo $this->Form->create('Itempedido', array('id' => 'AlteraQuantidade'.$item['Produto']['id'] , 'url' => array('controller' => 'itempedidos', 'action' =>'alterar_quantidade')));
+					echo $this->Form->hidden('produto_id', array( 'value' => $item['Produto']['id']));
+					echo $this->Form->input('quantidade', array('style' => 'margin-left: 43px;width:30px', 'value' => $item['Itempedido']['quantidade'], 'label' => false));
+					echo '<br>';
+					echo $this->Html->link(
+							'Alterar quantidade',
+							'#',
+							array('id' => 'LinkAlteraQuantidade'.$item['Produto']['id'], 'style' => 'font-size: 10px;width: 100%;')
+					);  
+					?><br>
+					<?php 
+					echo $this->Html->link(
+							'Remover Item',
+							'/itempedidos/delete/'.$item['Produto']['id'],
+							array('style' => 'font-size: 10px;text-align:center;width: 100%;')
+					);
+					echo '</form>';  
+					?>
+					&nbsp;
+				</td>
+				<td style="text-align:center">&nbsp;</td>
+				<td style="text-align:center">
+					<?php echo 'R$ '.$item['Itempedido']['valor_unitario_form']; ?>
+				</td>
+				<td style="text-align:center">
+					<?php echo 'R$ '.$item['Itempedido']['valor_total_form']; ?>
+				</td>
+			</tr>
+			<?php 
+		}
+		//inserir linha de subtotal
+		$subtotal_form = number_format($subtotal,2, ',', '.');
+		
+                
+                //VERIFICA SE PODE CALCULAR O FRETE
+                if($config_sistema['Configuracao']['calcula_frete']):
+		?>
+		<tr style="background-color: #DDD">
+			<td colspan="4" align="right">
+				<strong>Subtotal:</strong>
+			</td>
+			<td style="text-align:center" >
+				<strong>R$ <?php echo $subtotal_form ?> </strong>
+				
+			</td>
+		</tr>
+		<tr style="background-color: #EEE" >
+                        <td colspan="4" > 
+				<?php 
+				
+
+                                //fornecer formulário para calculo de frete
+                                echo $this->Form->create('Pedido', array('url' => array('controller' => 'pedidos', 'action' =>'calcular_frete'), 'style' => 'float: left'));
+                                echo '<label style="float:left">Insira o CEP</label>';
+                                echo $this->Form->input('cep', array('style' => 'margin-left: 8px;width:100px;', 'value' => $pedido['Pedido']['cep'], 'label' => false, 'div' => false));
+                                if(!empty($pedido['Pedido']['tipo_correio'])){
+                                    if($pedido['Pedido']['tipo_correio'] == '41106' ){
+                                        echo '<input type="radio" name="data[Pedido][tipo_correio]" checked="checked" value="41106"/>PAC&nbsp;&nbsp;&nbsp; ';
+                                        echo '<input type="radio" name="data[Pedido][tipo_correio]" value="40010"/>SEDEX';
+                                    }
+                                    else{
+                                        echo '<input type="radio" name="data[Pedido][tipo_correio]"  value="41106"/>PAC&nbsp;&nbsp;&nbsp; ';
+                                        echo '<input type="radio" name="data[Pedido][tipo_correio]" checked="checked" value="40010"/>SEDEX';    
+                                    }
+                                }else{
+                                    echo '<input type="radio" name="data[Pedido][tipo_correio]"  value="41106"/>PAC&nbsp;&nbsp;&nbsp; ';
+                                    echo '<input type="radio" name="data[Pedido][tipo_correio]" checked="checked" value="40010"/>SEDEX';    
+                                }
+                                //echo $this->Form->end(__('Calcular Frete', true));					
+                                
+				
+				?>
+                                <input type="submit" value="Calcular Frete" class='btn' />
+                                </form>
+				<span style="float:right"><strong>Frete:</strong></span>
+			</td>
+			<td style="text-align:center" >
+				<?php if(empty($pedido['Pedido']['frete'])): ?>
+					<strong>  </strong>
+				<?php else: ?>
+					<strong>R$ <?php echo $pedido['Pedido']['frete_form'] ?> </strong>
+				<?php endif; ?>
+			</td>
+		</tr>
+                
+                <?php
+                //VERIFICA SE PODE CALCULAR O FRETE - Fim
+                endif;
+                ?>
+		
+                <tr style="background-color: #DDD">
+			<td colspan="4">
+                            <span style="color: blue;float:left">O valor do Frete aumenta aproximadamente 2 reais na adição de mais produtos</span>
+                            <span style="text-align: right;float:right"><strong>TOTAL:</strong></span>
+			</td>
+			<td style="text-align:center" >
+				<strong>
+					<?php 
+					if(empty($pedido['Pedido']['frete'])){
+						$total = $subtotal;
+					}else{
+						$total = $subtotal + $pedido['Pedido']['frete'];
+						
+					}
+					$total_form = 'R$ '.number_format($total, 2, ',', '.');
+					
+					echo $total_form;
+					
+					?> 
+				</strong>
+				
+			</td>
+		</tr>
+		<?php
+
+	}else{
+		echo '<tr><td colspan="5" style="text-align: center;padding-top: 15px;">Não há itens na cesta</td></tr>';
+	}
+	?>
+	
+</table>
+<br />
+
+<?php
+echo $this->Form->create('Produto', array('url' => array('controller' => 'produtos', 'action' =>'index'), 'class' => 'formulario'));
+echo '<input type="submit" value="Escolher mais produtos" class="submit"></form>';	
+?>
+
+<span style="float: right">
+<?php 
+echo $this->Form->create('Pedido', array('url' => array('controller' => 'pedidos', 'action' =>'obter_endereco'), 'class' => 'formulario'));
+echo '<input type="submit" value="Comprar" class="submit"></form>';	
+?>
+</span>

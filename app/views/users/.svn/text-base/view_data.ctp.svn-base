@@ -1,0 +1,58 @@
+
+<ul>
+	<?php
+	echo $this->Html->link(
+	    $this->Html->image('icon/page_white_edit.png', array('class' => 'tipHoverBottom', 'title' => 'Editar dados')),
+	    '/users/edit_data/',
+	    array('escape' => false)
+	);
+        echo $this->Html->link(
+            $this->Html->image('icon/ui_text_field_password.png', array('class' => 'tipHoverBottom', 'title' => 'Mudar senha')),
+            '/users/change_password/'.$user['User']['id'],
+            array('escape' => false)
+        );
+	?>
+</ul>
+	
+
+<label class="formulario">Nome</label>
+<?php echo $user['User']['name']; ?>
+<br/>
+<label class="formulario">E-mail</label>
+<?php echo $user['User']['username']; ?>
+<br/>
+
+<label class="formulario">CPF</label>
+<?php echo $user['User']['cpf']; ?>
+<br/>
+
+<label class="formulario">Telefone</label>
+<?php echo $user['User']['telefone']; ?>
+<br/>
+
+<label class="formulario">Endereço</label>
+<?php echo $user['User']['endereco'].' '.$user['User']['numero']; ?>
+<br/>
+
+<label class="formulario">Complemento</label>
+<?php echo $user['User']['complemento']; ?>
+<br/>
+
+<label class="formulario">Bairro</label>
+<?php echo $user['User']['bairro']; ?>
+<br/>
+
+<label class="formulario">CEP</label>
+<?php echo $user['User']['cep']; ?>
+<br/>
+
+<label class="formulario">Cidade</label>
+<?php 
+if(!empty($user['User']['cidade_id']))
+	echo $user['Cidade']['nome'].' - '.$user['Cidade']['estado_id'];
+else
+	echo 'Não definido'; 
+?>
+<br/>
+
+

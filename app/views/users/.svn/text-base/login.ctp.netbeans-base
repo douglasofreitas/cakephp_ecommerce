@@ -1,0 +1,46 @@
+<table style="width: 100%">
+	<tr>
+            <td valign="top" align="center">
+			
+			<table style="border-collapse: collapse;margin-left: 32px;" width="300px" class="listagem" >
+				<tr class="listagem_header"><td style="background-color:#DDD;height:10px">Já sou cliente</td></tr>
+				<tr>
+					<td><br>
+						<?php
+						echo $this->Form->create('User', array('url' => array('controller' => 'users', 'action' =>'login'), 'class' => 'formulario'));
+						echo '<label class="formulario" style="width: 75px" >E-mail</label>';
+						echo $this->Form->input('User.username', array('label' => false));
+						echo '<br/>';
+						echo '<label class="formulario" style="width: 75px" >Senha</label>';
+						echo $this->Form->input('User.password', array('label' => false));
+						echo '<br/>';
+                                                echo $html->link('Esqueceu a senha?', '/users/remember', array('style' => 'float:right')); 
+                                                echo '<br/>';
+                                                echo '<input type="submit" value="Login" class="submit"></form>';	
+						?>						
+					</td>
+				</tr>
+			</table>
+			
+		</td>
+		<td valign="top">
+			
+			<table style="border-collapse: collapse" width="400px" class="listagem">
+				<tr class="listagem_header"><td style="background-color:#DDD;height:10px">Ainda não sou cliente</td></tr>
+				<tr>
+					<td>
+						<br>Preencha o formulário abaixo para criar uma conta no sistema<br><br>
+						<?php
+                                                
+						echo $this->Form->create('User', array('url' => array('controller' => 'users', 'action' =>'cadastro_cliente'), 'class' => 'formulario'));
+						
+                                                echo '<input type="submit" value="Cadastrar-se" class="submit"></form>';	
+						?>	
+					</td>
+				</tr>
+			</table>
+			
+			
+		</td>
+	</tr>
+</table>

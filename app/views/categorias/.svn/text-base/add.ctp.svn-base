@@ -1,0 +1,32 @@
+<script type="text/javascript">
+
+	$(function() {
+
+		$("#CategoriaAddForm").validate({
+			rules: {
+				'data[Categoria][nome]': { 
+					required: true,
+					minlength: 3,
+				},
+				
+			},
+			messages: {
+				'data[Categoria][nome]': { 
+					required: "Campo obrigatório!",
+					minlength: "Nome muito pequeno!",
+				},
+			}
+		});
+		
+	});
+
+</script>		
+
+<?php echo $this->Form->create('Categoria', array('url' => array('controller' => 'categorias', 'action' =>'add'), 'class' => 'formulario'));
+	echo '<label class="formulario">Nome *</label>';
+	echo $this->Form->input('nome', array('style' => 'width:300px', 'label' => false));
+	echo '<br/>';	
+ 
+	echo '<br/>';
+	echo $this->Form->end(__('Cadastrar', true));
+?>

@@ -1,0 +1,93 @@
+<div style="width:50%;float:left">
+    Bem vindo a loja virtual EcoestiLuz.<br/>
+    <br/>
+    <strong>NOVIDADE!!</strong><br/><br/>
+    <strong>Agora</strong> você poderá <strong>comprar nossos produtos diretamente pelo Site</strong>, de uma forma muito mais <strong>prática, rápida e segura</strong>.<br/><br/>
+    Você poderá começar a decorar seu ambiente de uma forma totalmente funcional, com produtos da EcoestiLuz<br/>
+    <br/><br/>
+    <strong>Vantagens</strong><br/>
+    <ul>
+        <li>Polímero contém aditivos <strong>anti-chamas</strong> e <strong>anti-UVA</strong> (radiação ultra-violeta)</li>
+        <br/>
+        <li>Pode usar lâmpadas frias de qualquer potência ou incandescentes de até 15 Watts (bolinhas coloridas ou decorativas)</li>
+    </ul>
+    
+    <br/>
+    
+    <?php
+    if(!empty($fotogalerias)){
+        echo '<strong>Galeria de fotos</strong><br/><br/>';
+        foreach($fotogalerias as $foto){
+            if($foto['Fotogaleria']['ativo'] == 1){
+                ?>
+	
+		<div class="foto_galeria_mini" align="center">
+			<div class="foto" >
+				<?php 
+				
+				if(empty($foto['Fotogaleria']['descricao']))
+					$text_lightbox = $foto['Fotogaleria']['nome'];
+				else
+					$text_lightbox = $foto['Fotogaleria']['nome'].': '.$foto['Fotogaleria']['descricao'];
+				echo $this->Html->link(
+					$this->Html->image('/fotos/'.$foto['Fotogaleria']['mini_img'], array("alt" => $foto['Fotogaleria']['nome'])),
+					'/fotogalerias/',
+					array('escape' => false, 'rel' => 'lightbox-gallery', 'title' => $text_lightbox )
+				);
+				?>
+                        </div>
+			<p>
+				<?php echo $foto['Fotogaleria']['nome']; ?>
+			</p>
+		</div>
+
+
+
+        <?php
+            }
+        }
+    }
+    ?>
+    
+</div>
+<div style="width:50%;float:right">
+    
+    <?php
+    if(!empty($produtos)){
+        echo '<strong>Produtos</strong><br/><br/>';
+        foreach($produtos as $produto){
+            if($produto['Produto']['ativo'] == 1){
+                ?>
+			<div class="produto_mini" >
+                            <table>
+                                <tr>
+                                    <div class="produto_foto" >
+                                            <?php 
+                                            echo $this->Html->link(
+                                                    $this->Html->image('/fotos/'.$produto['Produto']['img_mini'], array("alt" => "[Imagem]".$produto['Produto']['nome'])),
+                                                    '/produtos/view/'.$produto['Produto']['id'],
+                                                    array('escape' => false)
+                                            );
+                                            ?>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <p>
+                                            <?php echo $produto['Produto']['nome']; ?>
+                                            <br>
+                                            <strong><?php echo $produto['Subcategoria']['nome']; ?></strong>
+                                    </p>
+                                </tr>
+                            </table>
+				
+			</div>
+			
+                <?php
+            }
+        }
+    }
+    ?>
+</div>
+
+
+

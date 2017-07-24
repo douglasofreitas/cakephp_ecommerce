@@ -1,0 +1,1 @@
+Funções atualizadas no banco de dados

@@ -1,0 +1,7 @@
+<?php 
+echo '<label class="formulario">Subcategoria</label>';
+echo $this->Form->select($model.'SubcategoriaId', $select_subcategorias, null, array('name' => 'data['.$model.'][subcategoria_id]', 'empty' => $empty)); 
+?>
+<?php if(!$empty || $add):?>
+	<p style="float:right"><?php echo $html->link('Cadastrar nova subcategoria', '/subcategorias/add'); ?> </p>
+<?php endif;?>

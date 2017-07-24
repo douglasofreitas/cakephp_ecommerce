@@ -1,0 +1,78 @@
+<table class="listagem" width="auto">
+	<tr class="listagem_header">
+			<td style="width:auto; text-align:center;" ><?php echo $this->Paginator->sort('Código','id');?></td>
+                        <td style="width:auto; text-align:center;" ><?php echo $this->Paginator->sort('Cliente','User.name');?></td>
+			<td style="width:150px; text-align:center;" >Número de produtos</td>
+			<td style="width:160px; text-align:center;" ><?php echo $this->Paginator->sort('Status do pedido','Statuspedido.nome');?></td>
+                        <td style="width:auto; text-align:center;" >Valor</td>
+			<td style="width:150px; text-align:center;" ><?php echo $this->Paginator->sort('Data de criação', 'created');?></td>
+			<td style="width:60px; text-align:center;"  class="actions"><?php __('Ações');?></td>
+	</tr>
+	<?php
+	$i = 0;
+	foreach ($pedidos as $pedido):
+		$class = null;
+		if ($i++ % 2 == 0) {
+			$class = ' class="linha_impar"';
+		}else{
+			$class = ' class="linha_par"';
+		}
+	?>
+	<tr<?php echo $class;?>>
+		<td style="text-align:center">
+			<?php 
+			echo $this->Html->link(
+					$pedido['Pedido']['id'],
+					'/pedidos/view/'.$pedido['Pedido']['id']);  
+			?>
+			&nbsp;
+		</td>
+                <td style="text-align:center">
+			<?php 
+			echo $this->Html->link(
+                                $pedido['User']['name'],
+                                '/users/view/'.$pedido['Pedido']['user_id'],
+                                array('class' => 'tipHoverBottom', 'title' => 'Dados do cliente', 'target' => '_blank')
+                        );  
+			?>
+			&nbsp;
+		</td>
+		<td style="text-align:center">
+			<?php 
+                        $quantidade = 0;
+                        foreach($pedido['Itempedido'] as $itempedido){
+                            $quantidade += $itempedido['quantidade'];
+                        }
+                        echo $quantidade; 
+                        ?>
+			&nbsp;
+		</td>
+		<td style="text-align:center">
+			<?php echo $pedido['Statuspedido']['nome']; ?>
+			&nbsp;
+		</td>
+                <td style="text-align:center">
+			<?php echo 'R$ '.$pedido['Pedido']['valor_total_form']; ?>
+			&nbsp;
+		</td>
+		<td style="text-align:center">
+			<?php echo date('d/m/Y H:m:s', strtotime($pedido['Pedido']['created'])); ?>
+			&nbsp;
+		</td>
+		<td style="text-align:center" class="actions">
+			
+			<?php 
+                        echo $this->Html->image('icon/find.png', array('alt' => 'Visualizar pedido', 'url' => '/pedidos/view/'.$pedido['Pedido']['id'], 'class' => 'tipHoverRight', 'title' => 'Visualizar detalhes'));
+                        echo $this->Html->link(
+                            $this->Html->image("icon/bin_closed.png", array('class' => 'icon' ,"alt" => "Remover")),
+                            '/pedidos/delete/'.$pedido['Pedido']['id'],
+                            array('escape' => false),
+                            'Tem certeza que deseja remover este pedido?'
+                        );
+                        
+                        ?>
+		</td>
+	</tr>
+	<?php endforeach; ?>
+</table>
+
