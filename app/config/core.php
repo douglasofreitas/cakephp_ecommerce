@@ -27,8 +27,8 @@
  * 
  */        
 Configure::write('pag_seguro', array(
-        'email' => 'contato@homesample.com.br', // Email da conta do vendedor
-        'token' => 'DD449B9645604118A241B1F26D093E16' // Token gerado pelo PagSeguro
+        'email' => '', // Email da conta do vendedor
+        'token' => '' // Token gerado pelo PagSeguro
 ));
 
 
